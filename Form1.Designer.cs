@@ -30,7 +30,7 @@
         {
             this.CityDistrict = new System.Windows.Forms.TextBox();
             this.FirstDeliveryDateTime = new System.Windows.Forms.TextBox();
-            this.filterOrders = new System.Windows.Forms.Button();
+            this.FilterOrdersButton = new System.Windows.Forms.Button();
             this.listBoxOrder = new System.Windows.Forms.ListBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,6 +44,7 @@
             this.CityDistrict.Name = "CityDistrict";
             this.CityDistrict.Size = new System.Drawing.Size(145, 20);
             this.CityDistrict.TabIndex = 0;
+            this.CityDistrict.TextChanged += new System.EventHandler(this.CityDistrictTextChanged);
             this.CityDistrict.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CitiDistrictKeyPress);
             // 
             // FirstDeliveryDateTime
@@ -53,19 +54,19 @@
             this.FirstDeliveryDateTime.Name = "FirstDeliveryDateTime";
             this.FirstDeliveryDateTime.Size = new System.Drawing.Size(145, 20);
             this.FirstDeliveryDateTime.TabIndex = 1;
+            this.FirstDeliveryDateTime.TextChanged += new System.EventHandler(this.FirstDeliveryTimeTextChanged);
             this.FirstDeliveryDateTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FirstDeliveryTimeKeyPress);
-            this.FirstDeliveryDateTime.Leave += new System.EventHandler(this.FirstDeliveryTimeLeave);
             // 
-            // filterOrders
+            // FilterOrdersButton
             // 
-            this.filterOrders.Location = new System.Drawing.Point(51, 194);
-            this.filterOrders.Margin = new System.Windows.Forms.Padding(2);
-            this.filterOrders.Name = "filterOrders";
-            this.filterOrders.Size = new System.Drawing.Size(144, 40);
-            this.filterOrders.TabIndex = 2;
-            this.filterOrders.Text = "Отфильтровать и сохранить";
-            this.filterOrders.UseVisualStyleBackColor = true;
-            this.filterOrders.Click += new System.EventHandler(this.FilterButton_Click);
+            this.FilterOrdersButton.Location = new System.Drawing.Point(51, 194);
+            this.FilterOrdersButton.Margin = new System.Windows.Forms.Padding(2);
+            this.FilterOrdersButton.Name = "FilterOrdersButton";
+            this.FilterOrdersButton.Size = new System.Drawing.Size(144, 40);
+            this.FilterOrdersButton.TabIndex = 2;
+            this.FilterOrdersButton.Text = "Отфильтровать и сохранить";
+            this.FilterOrdersButton.UseVisualStyleBackColor = true;
+            this.FilterOrdersButton.Click += new System.EventHandler(this.FilterButton_Click);
             // 
             // listBoxOrder
             // 
@@ -104,7 +105,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBoxOrder);
-            this.Controls.Add(this.filterOrders);
+            this.Controls.Add(this.FilterOrdersButton);
             this.Controls.Add(this.FirstDeliveryDateTime);
             this.Controls.Add(this.CityDistrict);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -120,7 +121,7 @@
 
         private System.Windows.Forms.TextBox CityDistrict;
         private System.Windows.Forms.TextBox FirstDeliveryDateTime;
-        private System.Windows.Forms.Button filterOrders;
+        private System.Windows.Forms.Button FilterOrdersButton;
         private System.Windows.Forms.ListBox listBoxOrder;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label label1;

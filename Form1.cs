@@ -9,13 +9,14 @@ namespace OrderManager
     public partial class Form1 : Form
     {
         public bool _isValidDateTime;
-        public string _isValidDistrict;
+        public bool _isValidDistrict;
 
         public Form1()
         {
             InitializeComponent();
             FirstDeliveryDateTime.GotFocus += RemovePlaceholderText;
             FirstDeliveryDateTime.LostFocus += SetPlaceholderText;
+            FilterOrdersButton.Enabled = false;
         }
 
         /// <summary>
@@ -28,6 +29,16 @@ namespace OrderManager
                 // Если это не буква и не Backspace, то блокируем ввод
                 e.Handled = true;
             }
+        }
+
+        /// <summary>
+        /// Обновляем значение _isValidDistrict при изменении текста в поле "Район"
+        /// </summary>
+        private void CityDistrictTextChanged(object sender, EventArgs e)
+        {
+            // Проверяем, что поле не пустое
+            _isValidDistrict = !string.IsNullOrWhiteSpace(CityDistrict.Text);
+            UpdateFilterButtonState();
         }
 
         /// <summary>
@@ -69,33 +80,65 @@ namespace OrderManager
             }
         }
 
-        /// <summary>
-        /// При потере фокуса проверяем введенный текст
-        /// </summary>
-        public void FirstDeliveryTimeLeave(object sender, EventArgs e)
+        public void FirstDeliveryTimeTextChanged(object sender, EventArgs e)
         {
             // Проверяем формат даты при потере фокуса
             DateTime parsedDate;
             string inputValue = FirstDeliveryDateTime.Text;
             _isValidDateTime = DateTime.TryParseExact(inputValue, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDate);
+            UpdateFilterButtonState();
         }
+
+        ///// <summary>
+        ///// При потере фокуса проверяем введенный текст
+        ///// </summary>
+        //public void FirstDeliveryTimeLeave(object sender, EventArgs e)
+        //{
+        //    // Проверяем формат даты при потере фокуса
+        //    DateTime parsedDate;
+        //    string inputValue = FirstDeliveryDateTime.Text;
+        //    _isValidDateTime = DateTime.TryParseExact(inputValue, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDate);
+        //    UpdateFilterButtonState();
+        //}
 
         /// <summary>
         /// Обрабатываем клик и выдаем конечный результат
         /// </summary>
         private void FilterButton_Click(object sender, EventArgs e)
         {
-            if (!_isValidDateTime)
+            //Для теста
+            string filePath; //= "C:\\Users\\suspi\\source\\repos\\order.txt";
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                MessageBox.Show("Введите дату в формате: yyyy-MM-dd HH:mm:ss", "Неверный формат", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                FirstDeliveryDateTime.Focus();
-                return;
+                openFileDialog.Title = "Выберите файл с заказами";
+                openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+
+                if (openFileDialog.ShowDialog() != DialogResult.OK)
+                {
+                    MessageBox.Show("Файл не выбран. Операция отменена.");
+                    return;
+                }
+
+                filePath = openFileDialog.FileName;
             }
 
-            //Для теста
-            string filePath = "C:\\Users\\suspi\\source\\repos\\order.txt";
-            string resultDirectory = "C:\\Orders";
-            string resultFilePath = Path.Combine(resultDirectory, "resultOrder.txt");
+            //string resultDirectory = "C:\\Orders";
+            string resultFilePath; //= Path.Combine(resultDirectory, "resultOrder.txt");
+
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Title = "Сохраните результат фильтрации";
+                saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                saveFileDialog.FileName = "resultOrder.txt";
+
+                if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                {
+                    MessageBox.Show("Путь для сохранения не выбран. Операция отменена.");
+                    return;
+                }
+
+                resultFilePath = saveFileDialog.FileName;
+            }
 
             string district = CityDistrict.Text;
             DateTime firstDeliveryTime = DateTime.Parse(FirstDeliveryDateTime.Text);
@@ -123,11 +166,6 @@ namespace OrderManager
                 listBoxOrder.Items.Add($"Номер: {order.OrderNumber}, Время: {order.DeliveryTime}, Район: {order.District}");
             }
 
-            if (!Directory.Exists(resultDirectory))
-            {
-                Directory.CreateDirectory(resultDirectory);
-            }
-
             // Так же запишим в файл результат
             using (var writer = new StreamWriter(resultFilePath))
             {
@@ -140,6 +178,15 @@ namespace OrderManager
 
                 MessageBox.Show($"Данные записаны в файл {resultFilePath}");
             }
+        }
+
+        /// <summary>
+        /// Обновляем состояние кнопки FilterButton в зависимости от валидации даты и района
+        /// </summary>
+        private void UpdateFilterButtonState()
+        {
+            // Кнопка активна только если и дата, и район валидны
+            FilterOrdersButton.Enabled = _isValidDateTime && _isValidDistrict;
         }
     }
 }
