@@ -16,8 +16,13 @@ namespace OrderManager
             InitializeComponent();
             FirstDeliveryDateTime.GotFocus += RemovePlaceholderText;
             FirstDeliveryDateTime.LostFocus += SetPlaceholderText;
+            // Можно сделать лучше, пока что так
+            FirstDeliveryDateTime.ForeColor = Color.Gray;
+            FirstDeliveryDateTime.Text = "yyyy-MM-dd HH:mm:ss";
             FilterOrdersButton.Enabled = false;
         }
+
+        #region Район
 
         /// <summary>
         /// Проверяем, является ли введенный символ буквой
@@ -40,6 +45,10 @@ namespace OrderManager
             _isValidDistrict = !string.IsNullOrWhiteSpace(CityDistrict.Text);
             UpdateFilterButtonState();
         }
+
+        #endregion
+
+        #region Дата и время
 
         /// <summary>
         /// Убираем текст подсказки при фокусе на FirstDeliveryDateTime
@@ -89,17 +98,9 @@ namespace OrderManager
             UpdateFilterButtonState();
         }
 
-        ///// <summary>
-        ///// При потере фокуса проверяем введенный текст
-        ///// </summary>
-        //public void FirstDeliveryTimeLeave(object sender, EventArgs e)
-        //{
-        //    // Проверяем формат даты при потере фокуса
-        //    DateTime parsedDate;
-        //    string inputValue = FirstDeliveryDateTime.Text;
-        //    _isValidDateTime = DateTime.TryParseExact(inputValue, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDate);
-        //    UpdateFilterButtonState();
-        //}
+        #endregion
+
+        #region Сохранить и выбрать
 
         /// <summary>
         /// Обрабатываем клик и выдаем конечный результат
@@ -188,5 +189,7 @@ namespace OrderManager
             // Кнопка активна только если и дата, и район валидны
             FilterOrdersButton.Enabled = _isValidDateTime && _isValidDistrict;
         }
+
+        #endregion
     }
 }
