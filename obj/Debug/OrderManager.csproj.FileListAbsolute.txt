@@ -18,3 +18,13 @@ C:\Users\suspi\source\repos\OrderManager\obj\Debug\OrderManager.csproj.GenerateR
 C:\Users\suspi\source\repos\OrderManager\obj\Debug\OrderManager.csproj.CoreCompileInputs.cache
 C:\Users\suspi\source\repos\OrderManager\obj\Debug\OrderManager.exe
 C:\Users\suspi\source\repos\OrderManager\obj\Debug\OrderManager.pdb
+C:\Users\suspi\source\repos\OrdersManager\bin\Debug\OrderManager.exe.config
+C:\Users\suspi\source\repos\OrdersManager\bin\Debug\OrderManager.exe
+C:\Users\suspi\source\repos\OrdersManager\bin\Debug\OrderManager.pdb
+C:\Users\suspi\source\repos\OrdersManager\obj\Debug\OrderManager.csproj.AssemblyReference.cache
+C:\Users\suspi\source\repos\OrdersManager\obj\Debug\OrderManager.Form1.resources
+C:\Users\suspi\source\repos\OrdersManager\obj\Debug\OrderManager.Properties.Resources.resources
+C:\Users\suspi\source\repos\OrdersManager\obj\Debug\OrderManager.csproj.GenerateResource.cache
+C:\Users\suspi\source\repos\OrdersManager\obj\Debug\OrderManager.csproj.CoreCompileInputs.cache
+C:\Users\suspi\source\repos\OrdersManager\obj\Debug\OrderManager.exe
+C:\Users\suspi\source\repos\OrdersManager\obj\Debug\OrderManager.pdb

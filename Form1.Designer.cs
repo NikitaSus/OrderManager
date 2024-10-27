@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cityDistrict = new System.Windows.Forms.TextBox();
-            this.firstDeliveryDateTime = new System.Windows.Forms.TextBox();
+            this.CityDistrict = new System.Windows.Forms.TextBox();
+            this.FirstDeliveryDateTime = new System.Windows.Forms.TextBox();
             this.filterOrders = new System.Windows.Forms.Button();
             this.listBoxOrder = new System.Windows.Forms.ListBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -37,26 +37,29 @@
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // cityDistrict
+            // CityDistrict
             // 
-            this.cityDistrict.Location = new System.Drawing.Point(51, 120);
-            this.cityDistrict.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.cityDistrict.Name = "cityDistrict";
-            this.cityDistrict.Size = new System.Drawing.Size(145, 20);
-            this.cityDistrict.TabIndex = 0;
+            this.CityDistrict.Location = new System.Drawing.Point(51, 120);
+            this.CityDistrict.Margin = new System.Windows.Forms.Padding(2);
+            this.CityDistrict.Name = "CityDistrict";
+            this.CityDistrict.Size = new System.Drawing.Size(145, 20);
+            this.CityDistrict.TabIndex = 0;
+            this.CityDistrict.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CitiDistrictKeyPress);
             // 
-            // firstDeliveryDateTime
+            // FirstDeliveryDateTime
             // 
-            this.firstDeliveryDateTime.Location = new System.Drawing.Point(51, 159);
-            this.firstDeliveryDateTime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.firstDeliveryDateTime.Name = "firstDeliveryDateTime";
-            this.firstDeliveryDateTime.Size = new System.Drawing.Size(145, 20);
-            this.firstDeliveryDateTime.TabIndex = 1;
+            this.FirstDeliveryDateTime.Location = new System.Drawing.Point(51, 159);
+            this.FirstDeliveryDateTime.Margin = new System.Windows.Forms.Padding(2);
+            this.FirstDeliveryDateTime.Name = "FirstDeliveryDateTime";
+            this.FirstDeliveryDateTime.Size = new System.Drawing.Size(145, 20);
+            this.FirstDeliveryDateTime.TabIndex = 1;
+            this.FirstDeliveryDateTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FirstDeliveryTimeKeyPress);
+            this.FirstDeliveryDateTime.Leave += new System.EventHandler(this.FirstDeliveryTimeLeave);
             // 
             // filterOrders
             // 
             this.filterOrders.Location = new System.Drawing.Point(51, 194);
-            this.filterOrders.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.filterOrders.Margin = new System.Windows.Forms.Padding(2);
             this.filterOrders.Name = "filterOrders";
             this.filterOrders.Size = new System.Drawing.Size(144, 40);
             this.filterOrders.TabIndex = 2;
@@ -68,7 +71,7 @@
             // 
             this.listBoxOrder.FormattingEnabled = true;
             this.listBoxOrder.Location = new System.Drawing.Point(226, 70);
-            this.listBoxOrder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBoxOrder.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxOrder.Name = "listBoxOrder";
             this.listBoxOrder.Size = new System.Drawing.Size(337, 238);
             this.listBoxOrder.TabIndex = 3;
@@ -102,9 +105,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBoxOrder);
             this.Controls.Add(this.filterOrders);
-            this.Controls.Add(this.firstDeliveryDateTime);
-            this.Controls.Add(this.cityDistrict);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Controls.Add(this.FirstDeliveryDateTime);
+            this.Controls.Add(this.CityDistrict);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
@@ -115,8 +118,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox cityDistrict;
-        private System.Windows.Forms.TextBox firstDeliveryDateTime;
+        private System.Windows.Forms.TextBox CityDistrict;
+        private System.Windows.Forms.TextBox FirstDeliveryDateTime;
         private System.Windows.Forms.Button filterOrders;
         private System.Windows.Forms.ListBox listBoxOrder;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
