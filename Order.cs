@@ -21,6 +21,8 @@ namespace OrderManager
         /// <param name="filePath">Путь до файла</param>
         public List<Order> LoadOrder(string filePath)
         {
+            Logger.Log($"Начата загрузка заказов из файла: {filePath}");
+
             List<Order> orders = new List<Order>();
 
             foreach (var line in File.ReadLines(filePath))
@@ -31,6 +33,7 @@ namespace OrderManager
                 if (element.Length < 4)
                 {
                     Console.WriteLine($"Недостаточно данных в строке: {line}");
+                    Logger.Log($"Недостаточно данных в строке: {line}");
                     continue; // Переходим к следующей строке
                 }
 
@@ -50,6 +53,7 @@ namespace OrderManager
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Общая ошибка в строке: {line}. Ошибка: {ex.Message}");
+                    Logger.Log($"Ошибка при обработке строки: {line}. Ошибка: {ex.Message}");   
                 }
             }
 
@@ -61,6 +65,7 @@ namespace OrderManager
         /// </summary>
         public List<Order> FilteredOrder(List<Order> orders, DateTime firstDeliveryTime, string district)
         {
+            Logger.Log($"Начата фильтрация заказов для района: {district} и времени: {firstDeliveryTime:yyyy-MM-dd HH:mm:ss}");
             List<Order> filteredOrder = new List<Order>();
 
             foreach (var order in orders)
@@ -74,6 +79,7 @@ namespace OrderManager
                 }
             }
 
+            Logger.Log($"Фильтрация завершена. Найдено {filteredOrder.Count} заказов.");
             return filteredOrder;
         }
 

@@ -20,6 +20,7 @@ namespace OrderManager
             FirstDeliveryDateTime.ForeColor = Color.Gray;
             FirstDeliveryDateTime.Text = "yyyy-MM-dd HH:mm:ss";
             FilterOrdersButton.Enabled = false;
+            Logger.Log("Приложение запущено, инициализация завершена.");
         }
 
         #region Район
@@ -107,8 +108,9 @@ namespace OrderManager
         /// </summary>
         private void FilterButton_Click(object sender, EventArgs e)
         {
-            //Для теста
-            string filePath; //= "C:\\Users\\suspi\\source\\repos\\order.txt";
+            Logger.Log("Нажата кнопка фильтрации заказов.");
+
+            string filePath;
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Title = "Выберите файл с заказами";
@@ -117,10 +119,12 @@ namespace OrderManager
                 if (openFileDialog.ShowDialog() != DialogResult.OK)
                 {
                     MessageBox.Show("Файл не выбран. Операция отменена.");
+                    Logger.Log("Файл для загрузки заказов не выбран.");
                     return;
                 }
 
                 filePath = openFileDialog.FileName;
+                Logger.Log($"Выбран файл заказов: {filePath}");
             }
 
             //string resultDirectory = "C:\\Orders";
@@ -135,10 +139,12 @@ namespace OrderManager
                 if (saveFileDialog.ShowDialog() != DialogResult.OK)
                 {
                     MessageBox.Show("Путь для сохранения не выбран. Операция отменена.");
+                    Logger.Log("Не указан путь для сохранения результата.");
                     return;
                 }
 
                 resultFilePath = saveFileDialog.FileName;
+                Logger.Log($"Файл для сохранения результата: {resultFilePath}");
             }
 
             string district = CityDistrict.Text;
@@ -178,6 +184,7 @@ namespace OrderManager
                 }
 
                 MessageBox.Show($"Данные записаны в файл {resultFilePath}");
+                Logger.Log("Фильтрация завершена и данные успешно записаны.");
             }
         }
 
