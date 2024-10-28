@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -198,5 +199,23 @@ namespace OrderManager
         }
 
         #endregion
+
+        private void ShowLogsClick(object sender, EventArgs e)
+        {
+            string logFilePath = @"C:\logs\app_log.txt";
+
+            if (File.Exists(logFilePath))
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = logFilePath,
+                    UseShellExecute = true
+                });
+            }
+            else
+            {
+                MessageBox.Show("Файл логов не найден.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
